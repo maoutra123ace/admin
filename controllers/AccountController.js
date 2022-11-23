@@ -25,6 +25,52 @@ export const getAccountById = async (req, res) => {
   }
 };
 
+export const login = async (req, res) => {
+  let email = req.body.email
+  let password = req.body.password
+
+  if (!email || !password) {
+    return res.status(500).json({
+      errCode: 1,
+      errMessage: 'Missing input'
+    })
+  }
+
+  let userData = await AccountSvc.handleUserLogin(email, password)
+
+  return res.status(200).json({
+    errCode: userData.errCode,
+    meerrMessagessage: userData.errMessage,
+    user: userData.user ? userData.user : {},
+    token: userData.token ? userData.token : ""
+  })
+}
+
+export const register = async (req, res) => {
+  let email = req.body.emailSignup
+  let password = req.body.passwordSignup
+  let confirm = req.body.confirm
+
+  if (!email || !password || !confirm) {
+    return res.status(500).json({
+      errCode: 1,
+      message: 'Missing input'
+    })
+  }
+  if (password !== confirm) {
+    return res.status(500).json({
+      errCode: 2,
+      message: 'Invalid confirm password'
+    })
+  }
+  let userData = await AccountSvc.handleUserSignup(req.body)
+  return res.status(200).json({
+    errCode: userData.errCode,
+    errMessage: userData.errMessage,
+    user: userData.user ? userData.user : {}
+  })
+}
+
 export const addAccount = async (req, res) => {
   try {
     const account = req.body;

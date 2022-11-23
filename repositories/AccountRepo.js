@@ -12,6 +12,15 @@ export const getAccountById = async (_id) => {
   return await AccountModel.findById(_id);
 };
 
+export const getAccountByEmail = async (email) => {
+  try {
+    const user = await AccountModel.find({ email: "bt21@gmail.com" });
+    return user;
+  } catch (e) {
+    return e;
+  }
+};
+
 export const addAccount = async (account) => {
   return await AccountModel.create(account);
 };

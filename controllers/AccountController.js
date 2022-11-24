@@ -40,7 +40,7 @@ export const login = async (req, res) => {
 
   return res.status(200).json({
     errCode: userData.errCode,
-    meerrMessagessage: userData.errMessage,
+    errMessagessage: userData.errMessage,
     user: userData.user ? userData.user : {},
     token: userData.token ? userData.token : ""
   })

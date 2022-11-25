@@ -1,8 +1,12 @@
 import * as OrderDetailsSvc from "../services/OrderDetailsSvc.js";
+import * as ProductsSvc from '../services/ProductSvc.js';
 
 export const getOrderDetailsByOrderId = async (req, res) => {
   try {
     const orderDetails = await OrderDetailsSvc.getOrderDetailsByOrderId(req.params);
+    const t = await ProductsSvc.getProductById(orderDetails[0].ProductId);
+    console.log(orderDetails[0].Products);
+    console.log(t);
     return res.status(200).json(orderDetails);
   } catch (error) {
     res.status(500).json({

@@ -6,14 +6,26 @@ const schema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       required: true,
     },
-    ProductId: {
-      type: Schema.Types.ObjectId,
-      required: true,
-    },
-    UnitPrice: {
-      type: Number,
-      require: true,
-    },
+    Products: [
+    {    
+      ProductId: {
+        type: Schema.Types.ObjectId,
+        required: true,
+      },
+      Name: {
+        type: String,
+        require: true,
+      },
+      Image: {
+        type: String,
+        require: true,
+      },
+      Price: {
+        type: Number,
+        require: true,
+      }
+    }
+  ],
     Quantity: {
       type: Number,
       require: true,
